@@ -1,28 +1,70 @@
+[<img src="https://avatars.githubusercontent.com/u/82142807?s=400&amp;u=19e108a15566f3a1449bafb03b8dd706a72aebcd&amp;v=4" alt="OpenPecha" width="150" class="jop-noMdConv">](https://openpecha.org)
 
-<h1 align="center">
-  <br>
-  <a href="https://openpecha.org"><img src="https://avatars.githubusercontent.com/u/82142807?s=400&u=19e108a15566f3a1449bafb03b8dd706a72aebcd&v=4" alt="OpenPecha" width="150"></a>
-  <br>
-</h1>
+### Transfer text segment annotations to the original text
 
-<!-- Replace with 1-sentence description about what this tool is or does.-->
+## Usage
 
-<h3 align="center">Use this repo template for all new Python projects.</h3>
+### Install using pip.
 
+```
+pip install git+https://github.com/OpenPecha/transfer-text-segments.git
+
+```
+
+### Import
+
+```python
+from num2tib.core import convert
+from num2tib.core import convert2text
+
+print(convert(123.24))
+```
+
+### Transfer_text
+```python
+
+text = convert(123.24)
+# བརྒྱ་དང་ཉི་ཤུ་རྩ་གསུམ་ཚེག་ཉི་ཤུ་རྩ་བཞི་
+
+text = convert2text(123.24) #no place value 
+#གཅིག་ གཉིས་ གསུམ་ ཚེག་ གཉིས་ བཞི་ 
+
+```
+
+
+**Example**
+
+
+```python
+from num2tib.core import convert
+from num2tib.core import convert2text
+
+#float
+print(convert(123.2423))
+#བརྒྱ་དང་ཉི་ཤུ་རྩ་གསུམ་ཚེག་གཉིས་ བཞི་ གཉིས་ གསུམ་
+
+#int
+print(convert(123))
+#བརྒྱ་དང་ཉི་ཤུ་རྩ་གསུམ་
+
+#str
+print(convert('123.2423'))
+#བརྒྱ་དང་ཉི་ཤུ་རྩ་གསུམ་ཚེག་གཉིས་ བཞི་ གཉིས་ གསུམ་
+
+#no place value 
+print(convert2text(123))
+#གཅིག་ གཉིས་ གསུམ་ 
+```
+```
 ## Project owner(s)
 
 <!-- Link to the repo owners' github profiles -->
 
-- [@10zinten](https://github.com/10zinten)
-- [@evanyerburgh](https://github.com/evanyerburgh)
+- [@spsither](https://github.com/spsither)
+- [@TenzinGayche](https://github.com/TenzinGayche)
 
 ## Integrations
 
 <!-- Add any intregrations here or delete `- []()` and write None-->
 
 None
-## Docs
-
-<!-- Update the link to the docs -->
-
-Read the docs [here](https://wiki.openpecha.org/#/dev/coding-guidelines).
