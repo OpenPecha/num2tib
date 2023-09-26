@@ -106,6 +106,7 @@ dict={
 "1000000":"ས་ཡ་",
 "10000000":"བྱེ་བ་",
 "100000000":"དུང་ཕྱུར་",
+".":'ཚེག་'
 }
 
 def int2tib(num):
@@ -176,7 +177,7 @@ def convert2text(num):
         num (str/int/float): number to be converted to Tibetan
     """
     result=''
-    for i in num:
+    for i in str(num):
         result = result+dict[i]+' '
     return result
 def convert(num):
