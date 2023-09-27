@@ -7,7 +7,7 @@
 ### Install using pip.
 
 ```
-pip install git+https://github.com/OpenPecha/transfer-text-segments.git
+pip install git+https://github.com/OpenPecha/num2tib.git
 
 ```
 
