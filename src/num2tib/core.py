@@ -220,7 +220,6 @@ def convert(num, wylie=True):
     
     return result
 
-print(convert(31415,False))
 
 
 
