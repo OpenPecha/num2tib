@@ -212,8 +212,12 @@ def convert(num, wylie=True):
         integer_part, decimal_part = num_str.split('.')
         result = int2tib(integer_part[::-1]) + convert_decimal_part(decimal_part)
     elif isinstance(num, str):
-        integer_part, decimal_part = num.split('.')
-        result = int2tib(integer_part[::-1]) + convert_decimal_part(decimal_part)
+        if '.' in num:
+            integer_part, decimal_part = num.split('.')
+            result = int2tib(integer_part[::-1]) + convert_decimal_part(decimal_part)
+        else:
+            # Handle the case where there is no decimal part
+            result = int2tib(num[::-1])
 
     if wylie:
         result = converter.toWylie(result)
