@@ -6,7 +6,7 @@ build-backend = "setuptools.build_meta"
 name = "num2tib"
 version = "0.0.1"
 authors = [
-  { name="OpenPecha", email="dev@openpecha.org" },
+  { name="Tenzin Gayche", email="gaychetenzin@monlam.ai" },
 ]
 description = "A small example package"
 readme = "README.md"
@@ -16,6 +16,11 @@ classifiers = [
     "License :: OSI Approved :: MIT License",
     "Operating System :: OS Independent",
 ]
+dependencies = [
+  "openpecha>=0.8.21",
+  "pyewts"
+]
+
 
 [project.optional-dependencies]
 dev = [
@@ -23,6 +28,7 @@ dev = [
     "pytest-cov",
     "pre-commit",
 ]
+
 
 
 [project.urls]

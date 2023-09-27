@@ -106,8 +106,10 @@ dict={
 "1000000":"ས་ཡ་",
 "10000000":"བྱེ་བ་",
 "100000000":"དུང་ཕྱུར་",
-".":'ཚེག་'
 }
+import pyewts
+
+converter = pyewts.pyewts()
 
 def int2tib(num):
     """_summary_
@@ -177,55 +179,49 @@ def convert2text(num):
         num (str/int/float): number to be converted to Tibetan
     """
     result=''
-    for i in str(num):
+    for i in num:
         result = result+dict[i]+' '
     return result
-def convert(num):
-    """_summary_
-    this function convert number/strings to Tibetan text with place value
+def convert(num, wylie=True):
+    """
+    This function converts a number or string to Tibetan text with place value.
 
     Args:
-        num (str/int/float): number to be converted to Tibetan
-    
-    """ 
+        num (str/int/float): Number to be converted to Tibetan.
+        wylie (bool): Whether to convert the result to Wylie (default is True).
 
-    if(type(num)==int):
-        num=str(num)
-        result = int2tib(num[::-1])
-        return result
-    if(type(num)==float):
-        num=str(num)
-        num=num.split('.')
+    Returns:
+        str: Tibetan text representation of the number.
+    """
     
-        result = int2tib(num[0][::-1])
+    def convert_decimal_part(decimal_part):
+        if int(decimal_part) == 0:
+            return ""
+        elif len(decimal_part) == 2:
+            if int(decimal_part) <= 9:
+                return '་ཚེག་ཀླད་ཀོར་' + int2tib(decimal_part[::-1])
+            return '་ཚེག་' + int2tib(decimal_part[::-1])
+        else:
+            return '་ཚེག་' + convert2text(decimal_part)
 
-        if(int(num[1])==0):
-            return result
-        elif(len(num[1])==2):
-            if(int(num[1])<=9):
-                result = result + 'ཚེག་' + 'ཀླད་ཀོར་'+int2tib(num[1][::-1])
-                return result
-            result = result + 'ཚེག་' + int2tib(num[1][::-1])
-            return result
-        else :
-            result = result+ 'ཚེག་' + convert2text(num[1])
-        return result
+    if isinstance(num, int):
+        num_str = str(num)
+        result = int2tib(num_str[::-1])
+    elif isinstance(num, float):
+        num_str = str(num)
+        integer_part, decimal_part = num_str.split('.')
+        result = int2tib(integer_part[::-1]) + convert_decimal_part(decimal_part)
+    elif isinstance(num, str):
+        integer_part, decimal_part = num.split('.')
+        result = int2tib(integer_part[::-1]) + convert_decimal_part(decimal_part)
+
+    if wylie:
+        result = converter.toWylie(result)
     
-    if(type(num)==str):
-        num=num.split('.')
-        result = int2tib(num[0][::-1])
-        try:
-            int(num[1])
-        except:
-            return result
-        if(int(num[1])==0):
-            return result
-        elif(len(num[1])==2):
-            if(int(num[1])<=9):
-                result = result + 'ཚེག་' + 'ཀླད་ཀོར་'+int2tib(num[1][::-1])
-                return result
-            result = result + 'ཚེག་' + int2tib(num[1][::-1])
-        else :
-            result = result+ 'ཚེག་' + convert2text(num[1])
-
     return result
+
+print(convert(31415,False))
+
+
+
+
